@@ -1,15 +1,10 @@
 import { h, render } from 'preact';
 
 import onDomReady from './app/ready';
-import LoginPage from './app/Login.jsx';
-
-console.log(LoginPage);
-const node = document.getElementById('app')
-console.log(node);
+import Root from './app/Root.jsx';
 
 onDomReady(() => {
-  console.log("HEY");
-  render((
-    <LoginPage/>
-  ), node);
+  const node = document.getElementById('app')
+  console.log(node);
+  render(<Root/>, node);
 });

@@ -1,9 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
-
-const SRC = path.join(__dirname, 'src');
-const DIST = path.resolve(__dirname, 'dist');
+const HTMLPlugin = require('html-webpack-plugin');
 
 const ENV = process.env.NODE_ENV || 'development';
 
@@ -14,6 +12,12 @@ const plugins = [];
 plugins.push(new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(ENV),
   'process.env.IS_PRODUCTION': JSON.stringify(ENV === 'production'),
+}));
+
+plugins.push(new HTMLPlugin({
+  title: 'Miit',
+  filename: 'index.html',
+  template: './src/index.html',
 }));
 
 plugins.push(new webpack.NoErrorsPlugin());
