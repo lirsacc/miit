@@ -2,6 +2,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const ENV = process.env.NODE_ENV || 'development';
 
@@ -19,6 +20,10 @@ plugins.push(new HTMLPlugin({
   filename: 'index.html',
   template: './src/index.html',
 }));
+
+plugins.push(new CopyPlugin([
+  { from: './src/static', to: '/static' },
+]))
 
 plugins.push(new webpack.NoErrorsPlugin());
 
