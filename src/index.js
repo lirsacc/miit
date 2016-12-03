@@ -3,6 +3,8 @@ import {Router, route} from 'preact-router';
 import { Layout, Navigation, Card, Button, Icon, TextField, List } from 'preact-mdl';
 import updeep from 'updeep';
 
+window._route = route;
+
 import onDomReady from './app/ready';
 import LoginPage from './app/Login';
 import Categories from './app/Categories';
@@ -80,7 +82,7 @@ const initialState = {
 class App extends Component {
   constructor(props) {
     super(props);
-    const savedState = null; // localStorage.getItem('miitState');
+    const savedState = localStorage.getItem('miitState');
     if (savedState) {
       this.state = JSON.parse(savedState);
     } else {
@@ -112,21 +114,21 @@ class App extends Component {
 
         <Layout.Header>
           <Layout.HeaderRow>
-            <Layout.Title>Miit</Layout.Title>
+            <Layout.Title>
+              <img src="/static/img/miitnow_txt.png" alt="miitnow" style="height:20px;"></img>
+            </Layout.Title>
             <Layout.Spacer/>
-            <a href="/account">
+            { this.state.user &&
               <Button icon>
-                <Icon icon='account circle'></Icon>
+                <Icon icon='favorite border'></Icon>
               </Button>
-            </a>
+            }
             <Layout.Spacer/>
-            <Button icon>
-              <Icon icon='favorite border'></Icon>
-            </Button>
-            <Layout.Spacer/>
-            <Button icon>
-              <Icon icon='event'></Icon>
-            </Button>
+            { this.state.user &&
+              <Button onClick={() => route('/events')} icon>
+                <Icon icon='map'></Icon>
+              </Button>
+            }
           </Layout.HeaderRow>
 
         </Layout.Header>
@@ -144,7 +146,6 @@ class App extends Component {
                 update={this.update}
                 goTo={this.goTo}/>
               <_Home appState={this.state} update={this.update} path=""/>
-              <Account appState={this.state} update={this.update} path="/account"/>
               <Categories appState={this.state} update={this.update} path="/categories" goTo={this.goTo}/>
               <NotFound appState={this.state} update={this.update} type="404" default/>
             </Router>

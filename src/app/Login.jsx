@@ -16,7 +16,11 @@ export default class LoginPage extends Component {
         this.props.update({user: null, loading: false});
       } else if (status === 'connected') {
         if (this.props.appState.user) {
-          this.props.goTo('/');
+          if (Object.keys(this.props.appState.categorySelection).length) {
+            this.props.goTo('/events');
+          } else {
+            this.props.goTo('/categories');
+          }
           this.props.update({loading: false});
         } else {
           const {accessToken} = response.authResponse;
@@ -31,7 +35,12 @@ export default class LoginPage extends Component {
                 token: accessToken,
               }
             });
-            this.props.goTo('/');
+
+            if (Object.keys(this.props.appState.categorySelection).length) {
+              this.props.goTo('/events');
+            } else {
+              this.props.goTo('/categories');
+            }
           });
         }
       } else {
@@ -43,15 +52,21 @@ export default class LoginPage extends Component {
   requestLogin = () => {
     this.props.update({loading: true});
     FB.login((response) => {
-      console.log(response);
       this.props.update({loading: false});
+      if (Object.keys(this.props.appState.categorySelection).length) {
+        this.props.goTo('/events');
+      } else {
+        this.props.goTo('/categories');
+      }
     });
   }
 
   render() {
     return (
       <section class="appView flex flex-column justify-between p1">
-        <h1 class="flex-auto center">Miit</h1>
+        <h1 class="flex-auto center">
+          <img src="/static/img/miitnow.png" alt="miitnow" style="width: 100%"></img>
+        </h1>
         <div class="flex-auto mx-auto">
           <Button colored raised ripple onClick={this.requestLogin}>
             Login with Facebook
