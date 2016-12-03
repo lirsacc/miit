@@ -13,16 +13,20 @@ function Home() { return (<p>Home</p>); }
 const categories = [{
   name: '18 +',
   description: 'Kinky shit for ya!',
+  color: 'hsla(338, 100%, 44%, 1.0)',
+  people: 24,
 }, {
   name: 'Food and drinks',
   description: 'Fancy some grub?',
 }, {
   name: 'Culture',
   description: 'Like to learn stuff?',
+}, {
+  name: 'Outdoors & Sports',
+  description: 'GTFO!',
 }]
 
 onDomReady(() => {
-  history.replaceState(null,null,'/');
 
   const node = document.getElementById('app');
 
