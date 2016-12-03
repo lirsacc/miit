@@ -17,15 +17,15 @@ const categories = [{
 }, {
   name: 'Food and drinks',
   description: 'Fancy some grub?',
-  color: 'hsla(341, 100%, 40%, 1)'
+  color: 'hsla(214, 100%, 40%, 1)'
 }, {
   name: 'Culture',
   description: 'Like to learn stuff?',
-  color: 'hsla(341, 100%, 40%, 1)'
+  color: 'hsla(167, 100%, 40%, 1)'
 }, {
   name: 'Outdoors & Sports',
   description: 'GTFO!',
-  color: 'hsla(341, 100%, 40%, 1)'
+  color: 'hsla(183, 100%, 40%, 1)'
 }]
 
 onDomReady(() => {
