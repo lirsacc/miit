@@ -51,7 +51,7 @@ onDomReady(() => {
       <Router>
         <Home path=""/>
         <LoginPage path="/login"/>
-        <Activities path="/activities"/>
+        <Activities path="/activities" categories={categories}/>
         <Categories path="/categories" categories={categories}/>
         <NotFound type="404" default/>
       </Router>
