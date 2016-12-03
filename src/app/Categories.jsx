@@ -44,17 +44,15 @@ export default class Categories extends Component {
             }}>
               <Card.Title style={{
                 backgroundColor: category.color || 'hsla(235, 54%, 42%, 1.0)',
-                color: 'white',
+                color: 'white', width:'100%', display: 'inline-block'
               }}>
-                <Card.TitleText>{category.name}</Card.TitleText>
-              </Card.Title>
-                <Card.Text style={{float: 'left'}}>
-                  {category.description}
-                </Card.Text>
+                <Card.TitleText><b>{category.name}</b></Card.TitleText>
+                <Card.Description><h9>{category.description}</h9></Card.Description>
                 <Card.Actions border class="right-align">
-                  <Button onClick={()=>this.selectCategory(category.name, true)}>Sounds cool!</Button>
-                  <Button onClick={()=>this.selectCategory(category.name, false)}>Nah!</Button>
+                  <Button onClick={()=>this.selectCategory(category.name, true)}><img src="/static/img/thumbs_up.png" alt="miitnow" style="height:30px;"></img></Button>
+                  <Button onClick={()=>this.selectCategory(category.name, false)}><img src="/static/img/thumbs_dwn.png" alt="miitnow" style="height:30px;"></img></Button>
                 </Card.Actions>
+              </Card.Title>
             </Card>
           )}
           <Button style={{float: 'right'}}>Next</Button>

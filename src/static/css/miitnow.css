@@ -7,3 +7,11 @@
 .food{
 	background-color: #F29C9F;
 }
+
+.thumbs_up{
+	background-image: url('/static/img/thumbs_up.png');
+}
+
+.thumbs_up:hover{
+	background-image: url('/static/img/thumbs_up_fill.png');
+}

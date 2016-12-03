@@ -22,7 +22,7 @@ plugins.push(new HTMLPlugin({
 }));
 
 plugins.push(new CopyPlugin([
-  { from: './src/static', to: '/static' },
+  { from: './src/static', to: './static' },
 ]))
 
 plugins.push(new webpack.NoErrorsPlugin());

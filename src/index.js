@@ -12,19 +12,20 @@ function Home() { return (<p>Home</p>); }
 const categories = [{
   name: '18 +',
   description: 'Kinky shit for ya!',
-  color: 'hsla(358, 77%, 67%, 1)',
+  color: 'hsla(341, 100%, 40%, 1)',
   people: 24,
 }, {
   name: 'Food and drinks',
   description: 'Fancy some grub?',
-  color: 'hsla(168, 77%, 43%, 1)'
+  color: 'hsla(341, 100%, 40%, 1)'
 }, {
   name: 'Culture',
   description: 'Like to learn stuff?',
-  color: 'hsla(203, 77%, 43%, 1)'
+  color: 'hsla(341, 100%, 40%, 1)'
 }, {
   name: 'Outdoors & Sports',
   description: 'GTFO!',
+  color: 'hsla(341, 100%, 40%, 1)'
 }]
 
 onDomReady(() => {
@@ -35,17 +36,17 @@ onDomReady(() => {
   render((
     <Layout fixed-header fixed-drawer>
       <Layout.Header style={{
-                backgroundColor: 'white'}}>
+                backgroundColor: '#747676'}}>
         <Layout.HeaderRow style={{
-                backgroundColor: 'white'}}>
+                backgroundColor: '#747676'}}>
           <Layout.Title>  
-            <img src="static/img/miitnow.png" alt="miitnow" style="height:100px;"></img>
+            <img src="/static/img/miitnow_txt.png" alt="miitnow" style="height:20px;"></img>
           </Layout.Title>
           <Layout.Spacer/>
         </Layout.HeaderRow>
       </Layout.Header>
       <Layout.Drawer>
-        <Layout.Title>Miit</Layout.Title>
+        <Layout.Title><img src="/static/img/miitnow_txt.png" alt="miitnow" style="height:20px;"></img></Layout.Title>
 				<Navigation>
 					<Navigation.Link href="/">Home</Navigation.Link>
 					<Navigation.Link href="/login">Login</Navigation.Link>
