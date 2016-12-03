@@ -5,6 +5,7 @@ import { Layout, Navigation, Card, Button, Icon, TextField } from 'preact-mdl';
 import onDomReady from './app/ready';
 import LoginPage from './app/Login';
 import Categories from './app/Categories';
+import Activities from './app/Activities';
 
 function NotFound() { return (<p>Not found</p>); }
 function Home() { return (<p>Home</p>); }
@@ -39,12 +40,14 @@ onDomReady(() => {
 				<Navigation>
 					<Navigation.Link href="/">Home</Navigation.Link>
 					<Navigation.Link href="/login">Login</Navigation.Link>
+          <Navigation.Link href="/activities">Activities</Navigation.Link>
           <Navigation.Link href="/categories">Categories</Navigation.Link>
 				</Navigation>
 			</Layout.Drawer>
       <Router>
         <Home path=""/>
         <LoginPage path="/login"/>
+        <Activities path="/activities"/>
         <Categories path="/categories" categories={categories}/>
         <NotFound type="404" default/>
       </Router>
