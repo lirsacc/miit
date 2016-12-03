@@ -12,14 +12,16 @@ function Home() { return (<p>Home</p>); }
 const categories = [{
   name: '18 +',
   description: 'Kinky shit for ya!',
-  color: 'hsla(338, 100%, 44%, 1.0)',
+  color: 'hsla(358, 77%, 67%, 1)',
   people: 24,
 }, {
   name: 'Food and drinks',
   description: 'Fancy some grub?',
+  color: 'hsla(168, 77%, 43%, 1)'
 }, {
   name: 'Culture',
   description: 'Like to learn stuff?',
+  color: 'hsla(203, 77%, 43%, 1)'
 }, {
   name: 'Outdoors & Sports',
   description: 'GTFO!',

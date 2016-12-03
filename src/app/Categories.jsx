@@ -7,9 +7,13 @@ export default class Categories extends Component {
     this.state = {
       currentCategory: 0,
       selectedCategories: props.categories.reduce(
-        (obj, cat) => ({...obj, [cat.name]: undefined})
+        (obj, cat) => ({...obj, [cat.name]: undefined}), {}
       ),
     }
+  }
+
+  selectCategory = (name, val) => {
+    this.setState({selectedCategories: Object.assign(this.state.selectedCategories, {[name]:val})}) 
   }
 
   render(props) {
@@ -33,8 +37,8 @@ export default class Categories extends Component {
           )
         }
         <div>
-          {this.props.categories.filter((cat) => !this.state.selectedCategories[cat]).map((category) =>
-            <Card shadow="2dp" class="my1 border-box" border style={{
+          {this.props.categories.filter((cat) => this.state.selectedCategories[cat.name] == undefined).map((category) =>
+            <Card key={category.name} shadow="2dp" class="my1 border-box" border style={{
               minHeight: 0,
               width: '100%',
             }}>
@@ -48,14 +52,13 @@ export default class Categories extends Component {
                 {category.description}
               </Card.Text>
               <Card.Actions border class="right-align">
-                <Button>Sounds cool!</Button>
-                <Button>Nah</Button>
+                <Button onClick={()=>this.selectCategory(category.name, true)}>Sounds cool!</Button>
+                <Button onClick={()=>this.selectCategory(category.name, false)}>Nah!</Button>
               </Card.Actions>
             </Card>
           )}
         </div>
         <div>
-
         </div>
       </section>
     );
