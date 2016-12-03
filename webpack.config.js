@@ -45,7 +45,11 @@ module.exports = {
   plugins: plugins,
 
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json', '.css', '.scss']
+    extensions: ['*', '.js', '.jsx', '.json', '.css', '.scss'],
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
   },
 
   module: {

@@ -3,10 +3,12 @@ import mdl from 'material-design-lite/material';
 import { Button } from 'preact-mdl';
 
 export default function LoginPage(props) {
-  return (<section className="view">
-    <h1>Miit</h1>
-    <div>
-      <Button>Login</Button>
-    </div>
-  </section>);
+  return (
+    <section className="appView flex flex-column justify-between">
+      <h1 className="flex-auto center">Miit</h1>
+      <div className="flex-auto">
+        <Button>Login</Button>
+      </div>
+    </section>
+  );
 }
