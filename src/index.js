@@ -1,12 +1,15 @@
 import { h, render } from 'preact';
 
 import onDomReady from './app/ready';
+import LoginPage from './app/Login.jsx';
+
+console.log(LoginPage);
+const node = document.getElementById('app')
+console.log(node);
 
 onDomReady(() => {
+  console.log("HEY");
   render((
-    <div id="foo">
-        <span>Hello, world!</span>
-        <button onClick={ e => alert("hey!") }>Click Me</button>
-    </div>
-), document.getElementById('app'));
+    <LoginPage/>
+  ), node);
 });

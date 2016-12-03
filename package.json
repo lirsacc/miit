@@ -6,15 +6,12 @@
   "author": "lirsacc <c.lirsac@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
     "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-preset-es2015": "^6.18.0",
-    "rollup": "^0.36.4",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^5.0.5",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-sass": "^0.4.8",
-    "rollup-plugin-uglify": "^1.0.1",
-    "rollup-watch": "^2.5.0"
+    "json-loader": "^0.5.4",
+    "webpack": "2.1.0-beta.27"
   },
   "dependencies": {
     "material-design-lite": "^1.2.1",
@@ -22,8 +19,8 @@
     "preact-mdl": "^1.3.1"
   },
   "scripts": {
-    "build": "./node_modules/.bin/rollup -c rollup.config.js",
-    "watch": "./node_modules/.bin/rollup -c rollup.config.js --watch",
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch",
     "serve": "python -m SimpleHTTPServer 3000"
   }
 }
