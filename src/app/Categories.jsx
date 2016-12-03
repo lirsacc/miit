@@ -48,15 +48,16 @@ export default class Categories extends Component {
               }}>
                 <Card.TitleText>{category.name}</Card.TitleText>
               </Card.Title>
-              <Card.Text>
-                {category.description}
-              </Card.Text>
-              <Card.Actions border class="right-align">
-                <Button onClick={()=>this.selectCategory(category.name, true)}>Sounds cool!</Button>
-                <Button onClick={()=>this.selectCategory(category.name, false)}>Nah!</Button>
-              </Card.Actions>
+                <Card.Text style={{float: 'left'}}>
+                  {category.description}
+                </Card.Text>
+                <Card.Actions border class="right-align">
+                  <Button onClick={()=>this.selectCategory(category.name, true)}>Sounds cool!</Button>
+                  <Button onClick={()=>this.selectCategory(category.name, false)}>Nah!</Button>
+                </Card.Actions>
             </Card>
           )}
+          <Button style={{float: 'right'}}>Next</Button>
         </div>
         <div>
         </div>

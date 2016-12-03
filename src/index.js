@@ -34,9 +34,13 @@ onDomReady(() => {
   console.log(node);
   render((
     <Layout fixed-header fixed-drawer>
-      <Layout.Header>
-        <Layout.HeaderRow>
-          <Layout.Title>Miit</Layout.Title>
+      <Layout.Header style={{
+                backgroundColor: 'white'}}>
+        <Layout.HeaderRow style={{
+                backgroundColor: 'white'}}>
+          <Layout.Title>  
+            <img src="static/img/miitnow.png" alt="miitnow" style="height:100px;"></img>
+          </Layout.Title>
           <Layout.Spacer/>
         </Layout.HeaderRow>
       </Layout.Header>
