@@ -8,6 +8,7 @@ window._route = route;
 import onDomReady from './app/ready';
 import LoginPage from './app/Login';
 import Categories from './app/Categories';
+import Activities from './app/Activities';
 
 function NotFound() { return (<p>Not found</p>); }
 
@@ -42,6 +43,9 @@ function loggedInOnly(Component) {
     }
   }
 }
+
+const _Categories = loggedInOnly(Categories);
+const _Activities = loggedInOnly(Activities);
 
 const _Home = loggedInOnly(Home);
 
@@ -145,8 +149,9 @@ class App extends Component {
                 appState={this.state}
                 update={this.update}
                 goTo={this.goTo}/>
-              <_Home appState={this.state} update={this.update} path=""/>
-              <Categories appState={this.state} update={this.update} path="/categories" goTo={this.goTo}/>
+              <_Categories goTo={this.goTo} appState={this.state} update={this.update} path="/categories" goTo={this.goTo}/>
+              <_Activities appState={this.state} update={this.update} path="/events" goTo={this.goTo}/>
+              <_Activities appState={this.state} update={this.update} path="/" goTo={this.goTo}/>
               <NotFound appState={this.state} update={this.update} type="404" default/>
             </Router>
           }

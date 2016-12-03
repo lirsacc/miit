@@ -67,7 +67,7 @@ export default class Categories extends Component {
               </Card>
             );
           })}
-          <Button style={{float: 'right'}}>Next</Button>
+          <Button style={{float: 'right'}} onClick={() => this.props.goTo('/events')}>Next</Button>
         </div>
         <div>
         </div>
