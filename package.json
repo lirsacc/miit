@@ -22,7 +22,6 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack --watch",
-    "serve": "python -m SimpleHTTPServer 3000"
+    "watch": "./node_modules/.bin/webpack-dev-server --port 3000 --history-api-fallback"
   }
 }
