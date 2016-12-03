@@ -2,23 +2,22 @@ import { h, render, Component} from 'preact';
 import { Card, Button, Icon, Layout, TextField } from 'preact-mdl';
 
 export default class Categories extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentCategory: 0,
-      selectedCategories: props.categories.reduce(
-        (obj, cat) => ({...obj, [cat.name]: undefined}), {}
-      ),
-    }
-  }
 
   selectCategory = (name, val) => {
-    this.setState({selectedCategories: Object.assign(this.state.selectedCategories, {[name]:val})}) 
+    this.props.update({
+      categorySelection: {
+        ...this.props.appState.categorySelection,
+        [name]: val,
+      }
+    })
   }
 
+  done = () => this.props.goTo('/');
+
+  const categories = this.props.appState.categories;
+  const selection = this.props.appState.categorySelection;
   render(props) {
-    const availableCategories = this.props.categories.filter((cat) => !this.state.selectedCategories[cat]);
-    const nextCat = availableCategories[0];
+    const hasAvailableCategories = Object.values(categories).filter((cat) => selction[cat.name] === undefined).length > 0;
     return (
       <section class="appView p1">
         {

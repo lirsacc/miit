@@ -1,64 +1,168 @@
-import { h, render } from 'preact';
-import Router from 'preact-router';
-import { Layout, Navigation, Card, Button, Icon, TextField } from 'preact-mdl';
+import { h, render, Component } from 'preact';
+import {Router, route} from 'preact-router';
+import { Layout, Navigation, Card, Button, Icon, TextField, List } from 'preact-mdl';
+import updeep from 'updeep';
 
 import onDomReady from './app/ready';
 import LoginPage from './app/Login';
 import Categories from './app/Categories';
 
 function NotFound() { return (<p>Not found</p>); }
-function Home() { return (<p>Home</p>); }
 
-const categories = [{
-  name: '18 +',
-  description: 'Kinky shit for ya!',
-  color: 'hsla(341, 100%, 40%, 1)',
-  people: 24,
-}, {
-  name: 'Food and drinks',
-  description: 'Fancy some grub?',
-  color: 'hsla(214, 100%, 40%, 1)'
-}, {
-  name: 'Culture',
-  description: 'Like to learn stuff?',
-  color: 'hsla(167, 100%, 40%, 1)'
-}, {
-  name: 'Outdoors & Sports',
-  description: 'GTFO!',
-  color: 'hsla(183, 100%, 40%, 1)'
-}]
+function Home(props) {
+
+  const logout = () => {
+    props.update({
+      user: null,
+    });
+  }
+
+  return (
+    <section className="appView p1">
+      <pre>{JSON.stringify(props.appState.user, null, 4)}</pre>
+      <div className="center mx-auto">
+        <Button raised colored accent onClick={logout}>
+          Logout
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+function loggedInOnly(Component) {
+  return function(props) {
+    const user = props.appState.user;
+    if (!user) {
+      setTimeout(() => route('/login'));
+      return null;
+    } else {
+      return <Component {...props}/>;
+    }
+  }
+}
+
+const _Home = loggedInOnly(Home);
+
+const initialState = {
+  loading: false,
+  user: null,
+  categories: {
+    '18 +': {
+      name: '18 +',
+      description: 'Kinky shit for ya!',
+      color: 'hsla(338, 100%, 44%, 1.0)',
+      people: 24,
+    },
+    'Food and drinks': {
+      name: 'Food and drinks',
+      description: 'Fancy some grub?',
+      color: 'hsla(212, 88%, 53%, 1.0)',
+      peopleNearby: 10,
+    },
+    'Culture': {
+      name: 'Culture',
+      description: 'Like to learn stuff?',
+      color: 'hsla(42, 99%, 52%, 1.0)',
+      peopleNearby: 3,
+    },
+    'Outdoors & Sports': {
+      name: 'Outdoors & Sports',
+      description: 'GTFO!',
+      color: 'hsla(90, 52%, 48%, 1.0)',
+      peopleNearby: 42,
+    }
+  },
+  categorySelection: {},
+  events: {}
+};
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    const savedState = null; // localStorage.getItem('miitState');
+    if (savedState) {
+      this.state = JSON.parse(savedState);
+    } else {
+      this.state = initialState;
+    }
+  }
+
+  update = (changeset) => {
+    if (changeset) {
+      const nextState = updeep(changeset, this.state);
+      if (nextState !== this.state) {
+        this.setState(nextState);
+        localStorage.setItem('miitState', JSON.stringify({
+          ...this.state,
+          loading: false,
+        }));
+      }
+    }
+  }
+
+  goTo = (path) => {
+    route(path);
+  }
+
+  render() {
+    console.log(this.state);
+    return (
+      <Layout fixed-header>
+
+        <Layout.Header>
+          <Layout.HeaderRow>
+            <Layout.Title>Miit</Layout.Title>
+            <Layout.Spacer/>
+            <a href="/account">
+              <Button icon>
+                <Icon icon='account circle'></Icon>
+              </Button>
+            </a>
+            <Layout.Spacer/>
+            <Button icon>
+              <Icon icon='favorite border'></Icon>
+            </Button>
+            <Layout.Spacer/>
+            <Button icon>
+              <Icon icon='event'></Icon>
+            </Button>
+          </Layout.HeaderRow>
+
+        </Layout.Header>
+
+        <Layout.Content>
+          { this.state.loading ?
+            <p className="p1 center mx-auto border-box">
+              Loading
+            </p>
+            :
+            <Router>
+              <LoginPage
+                path="/login"
+                appState={this.state}
+                update={this.update}
+                goTo={this.goTo}/>
+              <_Home appState={this.state} update={this.update} path=""/>
+              <Account appState={this.state} update={this.update} path="/account"/>
+              <Categories appState={this.state} update={this.update} path="/categories" goTo={this.goTo}/>
+              <NotFound appState={this.state} update={this.update} type="404" default/>
+            </Router>
+          }
+        </Layout.Content>
+      </Layout>
+    );
+  }
+}
+
 
 onDomReady(() => {
-
+  FB.init({
+    appId      : '1160090270753292',
+    xfbml      : true,
+    version    : 'v2.6',
+    status     : true
+  });
   const node = document.getElementById('app');
-
-  console.log(node);
-  render((
-    <Layout fixed-header fixed-drawer>
-      <Layout.Header style={{
-                backgroundColor: '#747676'}}>
-        <Layout.HeaderRow style={{
-                backgroundColor: '#747676'}}>
-          <Layout.Title>  
-            <img src="/static/img/miitnow_txt.png" alt="miitnow" style="height:20px;"></img>
-          </Layout.Title>
-          <Layout.Spacer/>
-        </Layout.HeaderRow>
-      </Layout.Header>
-      <Layout.Drawer>
-        <Layout.Title><img src="/static/img/miitnow_txt.png" alt="miitnow" style="height:20px;"></img></Layout.Title>
-				<Navigation>
-					<Navigation.Link href="/">Home</Navigation.Link>
-					<Navigation.Link href="/login">Login</Navigation.Link>
-          <Navigation.Link href="/categories">Categories</Navigation.Link>
-				</Navigation>
-			</Layout.Drawer>
-      <Router>
-        <Home path=""/>
-        <LoginPage path="/login"/>
-        <Categories path="/categories" categories={categories}/>
-        <NotFound type="404" default/>
-      </Router>
-    </Layout>
-  ), node);
+  render(<App/>, node);
 });
